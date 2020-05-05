@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import XrayModal from "./Components/XrayComponent";
+import Navbar from './Components/NavbarComponent'
+import { Container } from '@material-ui/core';
+import Router from "./Components/Router";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+require('typeface-roboto')
+
+export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      address:0,
+      XrayModal:false
+    }
+    this.handleNav = this.handleNav.bind(this);
+    this.toggleXrayModal = this.toggleXrayModal.bind(this);
+  }
+  handleNav(address){
+    this.setState({address: address})
+      
+  }
+  toggleXrayModal(){
+    this.setState({XrayModal: !this.state.XrayModal})
+  }
+
+  render(){
+    console.log("address: ", this.state.address);
+    return (
+      <div className="App">
+        <div>
+          <Navbar toggleModal={this.toggleXrayModal} navigate={this.handleNav}/>
+        </div>
+        <Router route={this.state.address}/>
+        <XrayModal route={this.state.XrayModal} toggleModal={this.toggleXrayModal}/>
+      </div>
+    );
+  }
 }
-
-export default App;
