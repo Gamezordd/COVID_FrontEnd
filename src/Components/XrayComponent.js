@@ -5,16 +5,6 @@ import { Publish } from "@material-ui/icons";
 export default class XrayModal extends Component{
     constructor(props){
         super(props);
-        this.state={
-            pictures:[]
-        }
-        this.onDrop = this.onDrop.bind(this);
-    }
-
-    onDrop(picture){
-        this.setState({
-            picture: this.state.pictures.concat(picture)
-        })
     }
 
     render(){

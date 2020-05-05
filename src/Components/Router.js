@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Typography } from '@material-ui/core';
-
+import Home from "./HomeComponent";
 export default class Router extends React.Component{
     constructor(props){
         super(props)
@@ -35,15 +35,6 @@ export default class Router extends React.Component{
     }
 }
 
-export function Home() {
-    return(
-        <Container>
-            <Typography variant="h5" color="primary">
-                Content goes here
-            </Typography>
-        </Container>
-    )
-}
 export function Guidelines() {
     return(
         <Container>
