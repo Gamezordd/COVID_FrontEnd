@@ -6,10 +6,11 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
     root: {
-      background: "black"
+      
     },
     input: {
-      color: "white"
+      color: "white",
+      background: "#2e2e2e"
     },
     placeholder: {
       color: "#696969"

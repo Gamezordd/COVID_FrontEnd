@@ -18,10 +18,15 @@ const AnyReactComponent = ({ text }) => (
     </div>
   );
 export default class MapContainer extends Component{
+   constructor(props){
+       super(props);
+       this.state={
+           trigger:true
+       }
+   }
    
     render(){
         console.log("Loadmap: lat:", parseFloat(this.props.lat), "lng: ", parseFloat(this.props.lng));
-        try{           
             return(
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyCJVtn4hvD9W7WVyTc7XH16jMZ24ZQTnoo'}}
@@ -35,13 +40,6 @@ export default class MapContainer extends Component{
                         />
                 </GoogleMapReact>
             )
-        }
-        catch{
-            return(
-                <Typography style={{color:"white"}} variant="h5">
-                    Could not load Map.
-                </Typography>
-            )
-        }
+            
     }
 }

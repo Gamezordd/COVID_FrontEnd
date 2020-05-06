@@ -30,8 +30,8 @@ export default class Home extends Component{
     renderImage(){
         if (this.state.image !== ''){
             return(
-                <Grid container justify="center" xs={12}>
-                    <img src={this.state.image} height="400" alt="SelectedImage"/>
+                <Grid container justify="center" style={{maxHeight:"80vh", maxWidth:"30vw", overflowX:"scroll", overflowY:"scroll"}}>
+                    <img src={this.state.image} alt="SelectedImage"/>
                 </Grid>
             )
         }
@@ -49,7 +49,8 @@ export default class Home extends Component{
         if(this.state.loadMap){
             console.log("loadmap: ", this.state.loadMap);
             return(
-                <MapContainer 
+                <MapContainer
+                    key={this.state.lat} 
                     lat={this.state.lat} 
                     lng={this.state.lng}
                 />
@@ -75,7 +76,7 @@ export default class Home extends Component{
                         </Typography>
 
                         <Autocomplete
-                            style={{width: '98%', height:"9vh", marginTop:"5vh", backgroundColor:"rgba(18,18,18,0.6)", borderColor:"rgba(0,0,0,0)", borderBottom:"black", color:"white"}}
+                            style={{width: '98%', height:"9vh", marginTop:"5vh", backgroundColor:"rgba(46,46,46,0.8)", borderColor:"rgba(0,0,0,0)", borderBottom:"black", color:"white"}}
                             onPlaceSelected={(place) => {
                                 try{
                                 console.log("location: ", place);
@@ -87,7 +88,7 @@ export default class Home extends Component{
                                 })                                
                                 }
                                 catch{
-                                    alert('Error in text field. Possibly Daily quota exceeded.')                                }
+                                    alert('Daily quota limit for Google Maps API exceeded.')                                }
                             }}
                             types={['(regions)']}
                         />
@@ -114,11 +115,11 @@ export default class Home extends Component{
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid container direction="column" justify="center" xs={4} style={{padding:"2%"}}>
+                    <Grid container direction="column" justify="center" xs={4} style={{padding:"2%", borderRadius:"16px"}}>
                         {this.renderMap()}
                     </Grid>
 
-                    <Grid container direction="column" xs={4} style={{padding:"2%"}}>
+                    <Grid container direction="column" xs={4} style={{padding:"2%", borderRadius:"16px"}}>
                         {this.renderImage()}
                     </Grid>
                 </Grid>
