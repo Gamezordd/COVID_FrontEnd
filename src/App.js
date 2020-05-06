@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './App.css';
 import XrayModal from "./Components/XrayComponent";
 import Navbar from './Components/NavbarComponent'
-import { Container } from '@material-ui/core';
 import Router from "./Components/Router";
 
 require('typeface-roboto')

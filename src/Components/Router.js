@@ -2,9 +2,7 @@ import React from 'react';
 import { Container, Typography } from '@material-ui/core';
 import Home from "./HomeComponent";
 export default class Router extends React.Component{
-    constructor(props){
-        super(props)
-    }
+
     render(){
         console.log("recieved route: ", this.props.route)
         if(this.props.route === 0){

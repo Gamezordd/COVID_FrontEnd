@@ -15,6 +15,11 @@
   color: #696969;
 }
 
+.grd{
+  width:20%;
+  height:50%;
+}
+
 .ModalContainer{
   width: fit-content;
 }

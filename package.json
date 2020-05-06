@@ -9,13 +9,15 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "gh-pages": "^2.2.0",
-    "material-ui-search-bar": "^0.4.2",
+    "google-map-react": "^1.1.7",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-load-script": "^0.0.6",
+    "react-geocode": "^0.2.1",
+    "react-google-autocomplete": "^1.2.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-static-google-map": "^0.6.2",
     "typeface-roboto": "^0.0.75"
   },
   "scripts": {

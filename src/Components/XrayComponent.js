@@ -3,10 +3,6 @@ import { Typography, Container, Modal, Fade, Backdrop, TextField, Button ,Grid, 
 import { Publish } from "@material-ui/icons";
 
 export default class XrayModal extends Component{
-    constructor(props){
-        super(props);
-    }
-
     render(){
         console.log("modal: ", this.props.route)
         return(

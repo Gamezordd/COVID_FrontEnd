@@ -1,12 +1,9 @@
 import React, {Component} from "react";
-import {Grid, Box, Button, ButtonGroup, Typography} from "@material-ui/core";
+import {Grid, Button, ButtonGroup, Typography} from "@material-ui/core";
 import { Info } from "@material-ui/icons";
 
 
 export default class Navbar extends Component {
-    constructor(props){
-        super(props);
-    }
     handleClick = (route) => {
         this.props.navigate(route);
     }
@@ -20,13 +17,14 @@ export default class Navbar extends Component {
                 </Grid>
 
                 <Grid container xs={9} justify="flex-end" style={{padding:3}}>
+                
                 <Button 
                     startIcon={<Info/>}
                     variant="outlined" 
                     size="small" 
                     color="primary"  
                     onClick={() => this.props.toggleModal()} 
-                    style={{marginRight:"2%"}}
+                    style={{marginRight:"2%", display:"none"}}
                     >
                     Submit X-Ray
                 </Button>
