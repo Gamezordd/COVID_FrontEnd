@@ -36,8 +36,8 @@ export default class Router extends React.Component{
 export function Guidelines() {
     return(
         <Grid container justify="center" xs={12}>
-            <Grid container justify="center" xs={11} className="border" style={{marginTop:"5vh"}}>
-                <Typography variant="h5" color="primary" style={{margin:"10vh"}}>
+            <Grid container justify="center" xs={11} className="border" style={{marginTop:"5vh", textAlign:"center"}}>
+                <Typography variant="h5" color="primary" style={{marginLeft:"1vw", marginRight:"1vw", marginTop:"10vh", marginBottom:"10vh"}}>
                     Guidelines will be added stat! Please visit later. :)
                 </Typography>
             </Grid>
@@ -47,8 +47,8 @@ export function Guidelines() {
 export function Precautions() {
     return(
         <Grid container justify="center" xs={12}>
-            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh"}}>
-                <Typography variant="h5" color="primary" style={{margin:"10vh"}}>
+            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh", textAlign:"center"}}>
+                <Typography variant="h5" color="primary" style={{marginLeft:"1vw", marginRight:"1vw", marginTop:"10vh", marginBottom:"10vh"}}>
                     Precautions will be added stat! Please visit later. :)
                 </Typography>
             </Grid>
@@ -58,8 +58,8 @@ export function Precautions() {
 export function SelfDiagnosis() {
     return(
         <Grid container justify="center" xs={12}>
-            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh"}}>
-                <Typography variant="h5" color="primary" style={{margin:"10vh"}}>
+            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh", textAlign:"center"}}>
+                <Typography variant="h5" color="primary" style={{marginLeft:"1vw", marginRight:"1vw", marginTop:"10vh", marginBottom:"10vh"}}>
                     Self-Diagnosis will be added stat! Please visit later. :)
                 </Typography>
             </Grid>
@@ -69,8 +69,8 @@ export function SelfDiagnosis() {
 export function Members() {
     return(
         <Grid container justify="center" xs={12}>
-            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh"}}>
-                <Typography variant="h5" color="primary" style={{margin:"10vh"}}>
+            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh", textAlign:"center"}}>
+                <Typography variant="h5" color="primary" style={{marginLeft:"1vw", marginRight:"1vw", marginTop:"10vh", marginBottom:"10vh"}}>
                     Members will be added stat! Please visit later. :)
                 </Typography>
             </Grid>
