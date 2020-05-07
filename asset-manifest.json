@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/COVID_FrontEnd/static/css/main.0dc5d604.chunk.css",
-    "main.js": "/COVID_FrontEnd/static/js/main.65d04b84.chunk.js",
-    "main.js.map": "/COVID_FrontEnd/static/js/main.65d04b84.chunk.js.map",
+    "main.css": "/COVID_FrontEnd/static/css/main.4bec0fe9.chunk.css",
+    "main.js": "/COVID_FrontEnd/static/js/main.8e040bd0.chunk.js",
+    "main.js.map": "/COVID_FrontEnd/static/js/main.8e040bd0.chunk.js.map",
     "runtime-main.js": "/COVID_FrontEnd/static/js/runtime-main.ffa44057.js",
     "runtime-main.js.map": "/COVID_FrontEnd/static/js/runtime-main.ffa44057.js.map",
     "static/css/2.8eaf6045.chunk.css": "/COVID_FrontEnd/static/css/2.8eaf6045.chunk.css",
-    "static/js/2.23cad2ff.chunk.js": "/COVID_FrontEnd/static/js/2.23cad2ff.chunk.js",
-    "static/js/2.23cad2ff.chunk.js.map": "/COVID_FrontEnd/static/js/2.23cad2ff.chunk.js.map",
+    "static/js/2.717ee8c1.chunk.js": "/COVID_FrontEnd/static/js/2.717ee8c1.chunk.js",
+    "static/js/2.717ee8c1.chunk.js.map": "/COVID_FrontEnd/static/js/2.717ee8c1.chunk.js.map",
     "index.html": "/COVID_FrontEnd/index.html",
-    "precache-manifest.bc4b847806b04f9c53df3bc6329304ba.js": "/COVID_FrontEnd/precache-manifest.bc4b847806b04f9c53df3bc6329304ba.js",
+    "precache-manifest.baf731e57aefea66529ccac1ca5e07b7.js": "/COVID_FrontEnd/precache-manifest.baf731e57aefea66529ccac1ca5e07b7.js",
     "service-worker.js": "/COVID_FrontEnd/service-worker.js",
     "static/css/2.8eaf6045.chunk.css.map": "/COVID_FrontEnd/static/css/2.8eaf6045.chunk.css.map",
-    "static/css/main.0dc5d604.chunk.css.map": "/COVID_FrontEnd/static/css/main.0dc5d604.chunk.css.map",
-    "static/js/2.23cad2ff.chunk.js.LICENSE.txt": "/COVID_FrontEnd/static/js/2.23cad2ff.chunk.js.LICENSE.txt",
+    "static/css/main.4bec0fe9.chunk.css.map": "/COVID_FrontEnd/static/css/main.4bec0fe9.chunk.css.map",
+    "static/js/2.717ee8c1.chunk.js.LICENSE.txt": "/COVID_FrontEnd/static/js/2.717ee8c1.chunk.js.LICENSE.txt",
     "static/media/index.css": "/COVID_FrontEnd/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.ffa44057.js",
     "static/css/2.8eaf6045.chunk.css",
-    "static/js/2.23cad2ff.chunk.js",
-    "static/css/main.0dc5d604.chunk.css",
-    "static/js/main.65d04b84.chunk.js"
+    "static/js/2.717ee8c1.chunk.js",
+    "static/css/main.4bec0fe9.chunk.css",
+    "static/js/main.8e040bd0.chunk.js"
   ]
 }
