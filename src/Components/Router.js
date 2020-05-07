@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import Home from "./HomeComponent";
 export default class Router extends React.Component{
 
@@ -35,37 +35,45 @@ export default class Router extends React.Component{
 
 export function Guidelines() {
     return(
-        <Container>
-            <Typography variant="h5" color="primary">
-                Home goes here
-            </Typography>
-        </Container>
+        <Grid container justify="center" xs={12}>
+            <Grid container justify="center" xs={11} className="border" style={{marginTop:"5vh"}}>
+                <Typography variant="h5" color="primary" style={{margin:"10vh"}}>
+                    Guidelines will be added stat! Please visit later. :)
+                </Typography>
+            </Grid>
+        </Grid>
     )
 }
 export function Precautions() {
     return(
-        <Container>
-            <Typography variant="h5" color="primary">
-                Precautions Content goes here
-            </Typography>
-        </Container>
+        <Grid container justify="center" xs={12}>
+            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh"}}>
+                <Typography variant="h5" color="primary" style={{margin:"10vh"}}>
+                    Precautions will be added stat! Please visit later. :)
+                </Typography>
+            </Grid>
+        </Grid>
     )
 }
 export function SelfDiagnosis() {
     return(
-        <Container>
-            <Typography variant="h5" color="primary">
-                Self-Diagnosis Content goes here
-            </Typography>
-        </Container>
+        <Grid container justify="center" xs={12}>
+            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh"}}>
+                <Typography variant="h5" color="primary" style={{margin:"10vh"}}>
+                    Self-Diagnosis will be added stat! Please visit later. :)
+                </Typography>
+            </Grid>
+        </Grid>
     )
 }
 export function Members() {
     return(
-        <Container>
-            <Typography variant="h5" color="primary">
-                Members Content goes here
-            </Typography>
-        </Container>
+        <Grid container justify="center" xs={12}>
+            <Grid justify="center" container xs={11} className="border" style={{marginTop:"5vh"}}>
+                <Typography variant="h5" color="primary" style={{margin:"10vh"}}>
+                    Members will be added stat! Please visit later. :)
+                </Typography>
+            </Grid>
+        </Grid>
     )
 }

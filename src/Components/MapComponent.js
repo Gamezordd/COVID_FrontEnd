@@ -29,7 +29,7 @@ export default class MapContainer extends Component{
         console.log("Loadmap: lat:", parseFloat(this.props.lat), "lng: ", parseFloat(this.props.lng));
             return(
                 <GoogleMapReact
-                    style={{minHeight:"20vh", position: "relative"}}
+                    style={{height:"80vh", position: "relative"}}
                     bootstrapURLKeys={{ key: 'AIzaSyCJVtn4hvD9W7WVyTc7XH16jMZ24ZQTnoo'}}
                     defaultCenter={{lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lng)}}
                     defaultZoom={11}

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Grid, Button, ButtonGroup, Typography, Menu, MenuItem} from "@material-ui/core";
-import { Info } from "@material-ui/icons";
+import { Info , LocalHospitalOutlined} from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 import {isMobile} from "react-device-detect";
 
@@ -65,12 +65,12 @@ export default class Navbar extends Component {
                         >
                         Submit X-Ray
                     </Button>
-                    <ButtonGroup variant="text" color="inherit" className="buttons" style={{marginRight:"1%"}}>
+                    <ButtonGroup variant="text" color="inherit" className="buttons" style={{color:"#707070"}}>
                         <Button onClick={() => this.handleClick(0)}>Home</Button>
                         <Button onClick={() => this.handleClick(1)}>Guidelines</Button>
                         <Button onClick={() => this.handleClick(2)}>Precautions</Button>
-                        <Button onClick={() => this.handleClick(3)}>Self-Diagnosis</Button>
-                        <Button onClick={() => this.handleClick(4)}>Team Members</Button>
+                        <Button style={{minWidth:"10vw"}} onClick={() => this.handleClick(3)}>Self-Diagnosis</Button>
+                        <Button style={{minWidth:"10vw"}} onClick={() => this.handleClick(4)}>Team Members</Button>
                     </ButtonGroup>
                 </div>
             )
@@ -79,8 +79,9 @@ export default class Navbar extends Component {
     render(){
         return(
             <Grid container className="navbar">
-                <Grid container alignItems="center" xs={6} md={3} onClick={() => this.handleClick(0)}>
-                    <Typography variant="h5" style={{marginLeft:"3%"}} >
+                <Grid container alignItems="center" direction="row" xs={6} md={3} onClick={() => this.handleClick(0)}>
+                    <LocalHospitalOutlined fontSize="large" style={{marginLeft:"3%"}} />
+                    <Typography variant="h5" style={{marginLeft:"1%"}} >
                         Flatpex
                     </Typography>
                 </Grid>
