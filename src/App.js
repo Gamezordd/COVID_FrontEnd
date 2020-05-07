@@ -26,6 +26,7 @@ export default class App extends Component {
 
   render(){
     console.log("address: ", this.state.address);
+    document.body.style = 'background: #171717 ;';
     return (
       <div className="App">
         <div>

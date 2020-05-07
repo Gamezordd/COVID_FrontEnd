@@ -1,10 +1,10 @@
 import React,{Component} from "react";
 import {Grid, Button, Box, Typography} from '@material-ui/core';
-import { Publish } from "@material-ui/icons";
+import { Publish, PhotoLibrary } from "@material-ui/icons";
 import Autocomplete from 'react-google-autocomplete';
 import MapContainer from './MapComponent';
 import Text from "./TextComponent";
-
+import {isBrowser} from "react-device-detect";
 export default class Home extends Component{
     constructor(props){
         super(props);
@@ -29,11 +29,20 @@ export default class Home extends Component{
 
     renderImage(){
         if (this.state.image !== ''){
-            return(
-                <Grid container justify="center" style={{maxHeight:"80vh", maxWidth:"30vw", overflowX:"scroll", overflowY:"scroll"}}>
-                    <img src={this.state.image} alt="SelectedImage"/>
-                </Grid>
-            )
+            if(isBrowser){
+                return(
+                    <Grid container justify="center" style={{maxHeight:"80vh", maxWidth:"100vw", overflowX:"scroll", overflowY:"scroll"}}>
+                        <img src={this.state.image} alt="SelectedImage"/>
+                    </Grid>
+                );
+            }
+            else{
+                return(
+                    <Grid container justify="center" style={{maxHeight:"80vh", maxWidth:"30vw", minWidth:"150px", overflowX:"scroll", overflowY:"scroll"}}>
+                        <img src={this.state.image} alt="SelectedImage"/>
+                    </Grid>
+                );
+            }
         }
         else{
             return(
@@ -60,7 +69,7 @@ export default class Home extends Component{
             return(
                 <Grid item xs={4}>
                 <Typography variant="h5" style={{color: "white"}}>
-                    Select location to begin
+                    Enter location to begin
                 </Typography>
                 </Grid>
             )
@@ -70,9 +79,9 @@ export default class Home extends Component{
     render(){
         return(
                 <Grid container justify="space-evenly" direction="row">
-                    <Grid item direction="column" alignItems="flex-start" justify="center" xs={4} style={{ height:"100%", paddingRight:"2vw", paddingLeft:"2vw"}}>
+                    <Grid item direction="column" alignItems="flex-start" justify="center" xs={12} md={4} style={{ height:"100%", paddingRight:"2vw", paddingLeft:"2vw"}}>
                         <Typography variant="h5" style={{color:"#fff", paddingTop:"6vh", margin:5}}>
-                            Check Symptoms
+                            Details
                         </Typography>
 
                         <Autocomplete
@@ -93,7 +102,7 @@ export default class Home extends Component{
                             types={['(regions)']}
                         />
                         <Text/>
-                        <Grid container direction="row" alignItems="flex-start" style={{marginTop:"4vh"}}>
+                        <Grid container direction="row" className="btnpos" style={{marginTop:"4vh"}}>
                             <Box my={3} mr={2}>
                                 <Button startIcon={<Publish/>} variant="contained" color="primary">
                                     Upload
@@ -108,18 +117,18 @@ export default class Home extends Component{
                                     type="file"
                                 />
                                 <label style={{paddingTop:20, margin:5, marginTop:"8vh"}} htmlFor="contained-button-file">
-                                    <Button  variant="contained" color="primary" component="span">
+                                    <Button startIcon={<PhotoLibrary/>} variant="contained" color="primary" component="span">
                                     Select Picture
                                     </Button>
                                 </label>
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid container direction="column" justify="center" xs={4} style={{padding:"2%", borderRadius:"16px"}}>
+                    <Grid container direction="column" justify="center" xs={12} md={4} style={{ minHeight:"60vh",padding:"2%", borderRadius:"16px"}}>
                         {this.renderMap()}
                     </Grid>
 
-                    <Grid container direction="column" xs={4} style={{padding:"2%", borderRadius:"16px"}}>
+                    <Grid container direction="column" xs={12} md={4} style={{minHeight:"70vh", padding:"2%", borderRadius:"16px"}}>
                         {this.renderImage()}
                     </Grid>
                 </Grid>
