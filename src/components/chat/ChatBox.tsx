@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid} from 'semantic-ui-react';
+import { Grid, Loader} from 'semantic-ui-react';
 import './allstyle.css';
 import { ChatList } from './ChatList';
 import { Chat } from './Chat';
@@ -20,6 +20,7 @@ export interface ChatBoxProps {
 export interface ChatBoxState {
 	selectedChat: any | undefined;
 	windowWidth: number | undefined;
+	windowHeight: number | undefined;
 	onResize: () => void;
 }
 
@@ -33,6 +34,7 @@ export class ChatBoxUncomposed extends React.Component<
 		this.state = {
 			selectedChat: this.props.currentChat,
 			windowWidth: undefined,
+			windowHeight: undefined,
 			onResize: _.debounce(this.handleResize, 1000)
 		};
 	}
@@ -43,7 +45,7 @@ export class ChatBoxUncomposed extends React.Component<
 	}
 
 	handleResize = () => {
-		this.setState({windowWidth: window.innerWidth})
+		this.setState({windowWidth: window.innerWidth, windowHeight: window.innerHeight})
 	}
 
 	formatMessage = (message: string) => {
@@ -70,15 +72,15 @@ export class ChatBoxUncomposed extends React.Component<
 				</Grid>
 			);
 		}
-		else if(this.state.windowWidth){
+		else if(this.state.windowWidth && this.state.windowHeight){
 			return(
-				<MobileChatFC />
+				<MobileChatFC windowHeight={this.state.windowHeight} />
 			);
 		}
 		else{
 			return(
 				<div style={{paddingTop: "200px"}}>
-					<LoadingContainer/>
+					<Loader active />
 				</div>
 			)
 		}

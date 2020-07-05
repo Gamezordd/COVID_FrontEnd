@@ -11,6 +11,7 @@ interface IProps{
     toggleContacts: () => void;
     contacts: any[];
     onSend: (message: messageType) => void;
+    windowHeight: number;
 }
 
 type messageType ={
@@ -23,8 +24,8 @@ type messageType ={
 export const MobileChatBox = (props: IProps) => {
     const [message, setMessage] = useState('');
     const [scrollPosition, setScrollPosition] = useState(0);
+    const [chatHeight, setHeight] = useState(props.windowHeight)
     const debounceScroll =  useRef(_.debounce(() => handleScroll(), 500)).current;
-    const [ready, setReady] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value)
@@ -47,7 +48,28 @@ export const MobileChatBox = (props: IProps) => {
 
     useEffect(() => {
         document.getElementById('chatWindow')?.addEventListener('scroll', () => debounceScroll());
-    }, [debounceScroll])
+    }, [debounceScroll]);
+
+    useEffect(() => {
+        if( props.windowHeight >1000){
+            return setHeight(props.windowHeight * 0.83)
+        }
+        else if(props.windowHeight > 800 && props.windowHeight < 1000){
+            return setHeight(props.windowHeight * 0.79);
+        }
+        else if(props.windowHeight > 700 && props.windowHeight < 800){
+            return setHeight(props.windowHeight * 0.77);
+        }
+        else if(props.windowHeight > 650 && props.windowHeight < 700){
+            return setHeight(props.windowHeight * 0.75);
+        }
+        else if(props.windowHeight > 600 && props.windowHeight < 650){
+            return setHeight(props.windowHeight * 0.74);
+        }
+        else{
+            return setHeight(props.windowHeight * 0.7);
+        }
+    }, [props.windowHeight])
 
     const handleSubmit = () =>{
         props.onSend({content: message, chatId: props.user.chat, receiver: props.user.userId, recieverName: props.user.name});
@@ -72,7 +94,7 @@ export const MobileChatBox = (props: IProps) => {
             </Grid.Row>
             <Grid.Row columns="16" style={{padding: "0", paddingBottom:"3px"}} >
                 <Grid.Column width="16">
-                    <div id="chatWindow" style={{height:"69vh", overflowY:"auto"}}>
+                    <div id="chatWindow" style={{height: chatHeight, overflowY:"auto"}}>
                         { !props.loading ? props.messages.map(message => {
                             return(
                                 <ChatMessage
@@ -81,7 +103,7 @@ export const MobileChatBox = (props: IProps) => {
                                     content={message.content}
                                 />
                             )
-                        }): <LoadingContainer/>}
+                        }): <Loader active/>}
                     </div>
                 </Grid.Column>
             </Grid.Row>
@@ -89,8 +111,8 @@ export const MobileChatBox = (props: IProps) => {
                 <Grid.Column width="3" verticalAlign="middle">
                     <Button primary size="mini" onClick={() => handleSubmit()}>Send</Button>
                 </Grid.Column>
-                <Grid.Column width="10">
-                    <input style={{width: "100%"}} onChange={(e) => handleChange(e)} value={message} />
+                <Grid.Column verticalAlign="middle" width="11">
+                    <input style={{width: "100%", height:"100%"}} onChange={(e) => handleChange(e)} value={message} />
                 </Grid.Column>
                 <Grid.Column verticalAlign="middle" width="2">
                     <Button size="mini" icon={<Icon name="paperclip"/>}></Button>

@@ -7,10 +7,12 @@ import { LoadingContainer } from '../../maps';
 import { Firebase } from '../../../firebase';
 import _ from 'lodash';
 import { MobileChatBox } from './MobileChatBox';
+import { Loader } from 'semantic-ui-react';
 
 interface IProps{
-    firebase: Firebase;
-    name: string;
+    firebase?: Firebase;
+    name?: string;
+    windowHeight: number;
 }
 interface IState{
     selectedChat: any;
@@ -47,16 +49,16 @@ class MobileChatFCBasic extends React.Component<IProps, IState>{
     }
 
     async componentDidMount(){
-        await this.props.firebase.getUserChatsRef().on('child_added', async snapshot => {
+        await this.props.firebase?.getUserChatsRef().on('child_added', async snapshot => {
             if(!snapshot.key) return;
             this.setState({isLoading: true})
             var imgUrl = null;
-            await this.props.firebase.getProfileImageUrl(snapshot.key).then(url => {
+            await this.props.firebase?.getProfileImageUrl(snapshot.key).then(url => {
                 imgUrl = url;
             });
             this.setState({isLoading: false, chats: this.state.chats.concat({userId: snapshot.key, ...snapshot.val(), imageURL: imgUrl})})
         });
-        this.props.firebase.getUserChatsRef().on('child_removed', snapshot =>{
+        this.props.firebase?.getUserChatsRef().on('child_removed', snapshot =>{
             const indexToRemove = this.state.chats.findIndex(element => element.userId === snapshot.key);
             this.setState({chats: this.state.chats.splice(indexToRemove, 1)});
         })
@@ -70,11 +72,11 @@ class MobileChatFCBasic extends React.Component<IProps, IState>{
     fetchMessages = (d: any) => {
         this.setState({isFetching: true})
 
-        this.props.firebase.getChat(d.chat)
+        this.props.firebase?.getChat(d.chat)
             .then(messages => {
                 this.setState({messages: messages, isFetching: false});
             })
-        this.props.firebase.getChatRef(d.chat)
+        this.props.firebase?.getChatRef(d.chat)
             .limitToLast(1)
             .on('child_added', snapshot => {
                 console.log("new message: ", snapshot.val());
@@ -85,7 +87,7 @@ class MobileChatFCBasic extends React.Component<IProps, IState>{
 
     handleChatSelect = (d: any) => {
         if(this.state.selectedChat){
-            this.props.firebase.getChatRef(this.state.selectedChat.chat).off('child_added');
+            this.props.firebase?.getChatRef(this.state.selectedChat.chat).off('child_added');
         }
         this.setState({ selectedChat: d, isContactsOpen: false});
         this.fetchMessages(d);
@@ -97,8 +99,8 @@ class MobileChatFCBasic extends React.Component<IProps, IState>{
 
     handleMessageSubmit = (message: message) => {
         console.log("messages: ", this.state.messages);
-
-        this.props.firebase.sendMessage({
+        if(!this.props.name) return;
+        this.props.firebase?.sendMessage({
             content: message.content,
 			name: this.props.name,
 			chatId: message.chatId,
@@ -108,32 +110,29 @@ class MobileChatFCBasic extends React.Component<IProps, IState>{
     }
 
     render(){
-        
         if(this.state.isContactsOpen){
             return(
-                <div style={{paddingTop: "15vh"}}>
+                <div style={{paddingTop: "80px"}}>
                     <MobileChatContacts onChatSelect={this.handleChatSelect} chats={this.state.chats} loading={this.state.isLoading}/>
                 </div>
             )
         }
         else if(!this.state.isContactsOpen){
-            console.log("messages: ", this.state.messages);
-            
             return(
-                <div style={{paddingTop: "15vh"}}>
-                    <MobileChatBox onSend={this.handleMessageSubmit} messages={this.state.messages} loading={this.state.isFetching} user={this.state.selectedChat} toggleContacts={this.handleToggleContacts} contacts={this.state.chats}/>
+                <div style={{paddingTop: "80px"}}>
+                    <MobileChatBox windowHeight={this.props.windowHeight} onSend={this.handleMessageSubmit} messages={this.state.messages} loading={this.state.isFetching} user={this.state.selectedChat} toggleContacts={this.handleToggleContacts} contacts={this.state.chats}/>
                 </div>
             );
         }
         else{
             return(
-                <div style={{marginTop: "20%"}}><LoadingContainer/></div>
+                <div style={{marginTop: "20%"}}><Loader active/></div>
             )
         }
     }
 }
 
-export const MobileChatFC = compose<any, any>(
+export const MobileChatFC: React.ComponentClass<IProps, IState> = compose<any, any>(
     withFirebase,
     connect(mapStateToProps, null)
 )(MobileChatFCBasic)
