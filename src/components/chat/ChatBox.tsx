@@ -1,10 +1,13 @@
 import React from 'react';
-import { Grid, GridColumn } from 'semantic-ui-react';
+import { Grid} from 'semantic-ui-react';
 import './allstyle.css';
 import { ChatList } from './ChatList';
 import { Chat } from './Chat';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+import { LoadingContainer } from '../maps';
+import { MobileChatFC } from './Mobile';
 
 const mapStateToProps = (state: any) => ({
 	currentChat: state.chat.current,
@@ -16,7 +19,10 @@ export interface ChatBoxProps {
 
 export interface ChatBoxState {
 	selectedChat: any | undefined;
+	windowWidth: number | undefined;
+	onResize: () => void;
 }
+
 
 export class ChatBoxUncomposed extends React.Component<
 	ChatBoxProps,
@@ -26,7 +32,18 @@ export class ChatBoxUncomposed extends React.Component<
 		super(props);
 		this.state = {
 			selectedChat: this.props.currentChat,
+			windowWidth: undefined,
+			onResize: _.debounce(this.handleResize, 1000)
 		};
+	}
+
+	componentDidMount(){
+		window.addEventListener('resize', this.state.onResize)
+		this.state.onResize();
+	}
+
+	handleResize = () => {
+		this.setState({windowWidth: window.innerWidth})
 	}
 
 	formatMessage = (message: string) => {
@@ -43,14 +60,28 @@ export class ChatBoxUncomposed extends React.Component<
 	};
 
 	render() {
-		return (
-			<Grid>
-				<Grid.Row>
-					<ChatList selectChat={this.handleChatSelect} />
-					<Chat selectedChat={this.state.selectedChat} />
-				</Grid.Row>
-			</Grid>
-		);
+		if(this.state.windowWidth && this.state.windowWidth > 800){
+			return (
+				<Grid>
+					<Grid.Row>
+						<ChatList selectChat={this.handleChatSelect} />
+						<Chat selectedChat={this.state.selectedChat} />
+					</Grid.Row>
+				</Grid>
+			);
+		}
+		else if(this.state.windowWidth){
+			return(
+				<MobileChatFC />
+			);
+		}
+		else{
+			return(
+				<div style={{paddingTop: "200px"}}>
+					<LoadingContainer/>
+				</div>
+			)
+		}
 	}
 }
 

@@ -1,5 +1,5 @@
-import React, { Children } from 'react';
-import { Feed, Input, Divider, Segment, Grid, Card } from 'semantic-ui-react';
+import React from 'react';
+import { Feed, Input, Divider, Grid, Card } from 'semantic-ui-react';
 import './allstyle.css';
 import { ChatListEntry } from './ChatListEntry';
 import { Firebase } from '../../firebase';

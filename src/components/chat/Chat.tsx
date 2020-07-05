@@ -86,6 +86,7 @@ class ChatComponent extends React.Component<ChatProps, ChatState> {
 	};
 
 	componentDidUpdate() {
+		if (!this.props.selectedChat) return
 		if (this.state.currentID !== this.props.selectedChat.userId)
 			this.setState({ firstLoadDone: false });
 		if (this.state.isLoading === true) return;
