@@ -18,8 +18,6 @@ export class CardContainerComponent extends React.Component<
 	componentDidMount() {
 		window.addEventListener('resize', this.handleEnumerateColumns);
 		this.handleEnumerateColumns();
-		console.log("length: ", this.props.favouriteUnis.length);
-		
 	}
 
 	componentWillUnmount() {
