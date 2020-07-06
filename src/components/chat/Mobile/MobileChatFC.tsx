@@ -49,15 +49,31 @@ class MobileChatFCBasic extends React.Component<IProps, IState>{
     }
 
     async componentDidMount(){
-        await this.props.firebase?.getUserChatsRef().on('child_added', async snapshot => {
-            if(!snapshot.key) return;
+        if(this.state.chats.length === 0){
             this.setState({isLoading: true})
-            var imgUrl = null;
-            await this.props.firebase?.getProfileImageUrl(snapshot.key).then(url => {
-                imgUrl = url;
+            await this.props.firebase?.getUserChatsRef().on('value', async snapshot => {
+                if(!snapshot.val()) return this.setState({chats: ["null"]});
+                for (const [key, value] of Object.entries(snapshot.val())){
+                    const val: any = value;
+                    await this.props.firebase?.getProfileImageUrl(key).then(url => {
+                        this.setState({chats: this.state.chats.concat({userId: key, ...val, imageURL: url === "" ? "https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png" : url})})
+                    });
+                }
+                this.setState({isLoading: false});
+                //this.setState({isLoading: false, chats: this.state.chats.concat({userId: snapshot.key, ...snapshot.val(), imageURL: imgUrl})})
             });
-            this.setState({isLoading: false, chats: this.state.chats.concat({userId: snapshot.key, ...snapshot.val(), imageURL: imgUrl})})
-        });
+        }
+        else{
+            await this.props.firebase?.getUserChatsRef().on('child_added', async snapshot => {
+                if(!snapshot.key) return;
+                console.log("chat: ", snapshot.val());
+                var imgUrl = null;
+                await this.props.firebase?.getProfileImageUrl(snapshot.key).then(url => {
+                    imgUrl = url;
+                });
+                this.setState({chats: this.state.chats.concat({userId: snapshot.key, ...snapshot.val(), imageURL: imgUrl})})
+            });
+        }
         this.props.firebase?.getUserChatsRef().on('child_removed', snapshot =>{
             const indexToRemove = this.state.chats.findIndex(element => element.userId === snapshot.key);
             this.setState({chats: this.state.chats.splice(indexToRemove, 1)});
@@ -79,7 +95,6 @@ class MobileChatFCBasic extends React.Component<IProps, IState>{
         this.props.firebase?.getChatRef(d.chat)
             .limitToLast(1)
             .on('child_added', snapshot => {
-                console.log("new message: ", snapshot.val());
                 this.setState({messages: this.state.messages.concat({id: snapshot.key, ...snapshot.val()})});
             });
     }
@@ -98,7 +113,6 @@ class MobileChatFCBasic extends React.Component<IProps, IState>{
     }
 
     handleMessageSubmit = (message: message) => {
-        console.log("messages: ", this.state.messages);
         if(!this.props.name) return;
         this.props.firebase?.sendMessage({
             content: message.content,

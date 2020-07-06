@@ -1,5 +1,7 @@
 import React from 'react';
 import { Grid, Divider, Loader } from 'semantic-ui-react';
+import { SearchBar } from './SearchBar';
+import { EmptyContainer } from '../../discover/EmptyContainer';
 
 interface IProps{
     onChatSelect: (d: any) => void;
@@ -65,42 +67,55 @@ export const MobileChatContacts = (props: IProps) => {
         }
         
     }
-
-    return(
-        <React.Fragment>
-             <div style={{fontSize: "17px", textAlign:"center"}}><strong>Chats</strong></div>
-                <Divider style={{margin: "8px", padding: 0}}/>
-            {props.loading || props.chats.length === 0 ? <Loader active/> : props.chats.map((chat: chatType) => {
-                return (
-                    <div onClick={() => props.onChatSelect(chat)}>
-                        <Grid centered columns="16">
-                            <Grid.Column width="4" verticalAlign="middle">
-                                <div style={{display: "flex", justifyContent: "center", alignItems:"center"}}>
-                                    {chat.imageURL ? 
-                                        <img src={chat.imageURL ? chat.imageURL : undefined} alt="contactPicture" style={{height: "50px", width: "50px"}} /> 
-                                        :
-                                        <img style={{height: "50px", width: "50px"}} src="https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png" alt="placeholder" />
-                                    }
-                                </div>
-                            </Grid.Column>
-                            <Grid.Column floated="right" width="12">
-                                <Grid columns="16">
-                                    <Grid.Column verticalAlign="middle" floated="left" width="12">
-                                        <strong style={{fontSize: "16px", margin:"0px"}}> {chat.name} </strong>
-                                    </Grid.Column>
-                                    <Grid.Column verticalAlign="middle" floated="right" width="4">
-                                        <em style={{fontSize: "14px",color:"grey", paddingRight:"10px"}}> {formatLastActive(chat.lastActive)} </em>
-                                    </Grid.Column>
-                                </Grid>
-                                <Grid.Row>
-                                    <div style={{fontSize: "14px", paddingTop: "10px", color: "grey"}}> {chat.latest} </div>
-                                </Grid.Row>
-                            </Grid.Column>
-                        </Grid>
-                        <Divider style={{margin: "5px"}}/>
-                    </div>
-                );
-            })}
-        </React.Fragment>
-    )
+    if(props.loading && !(props.chats[0] === "null")){
+        return(
+            <Loader active/>
+        )
+    }
+    else if(props.loading && props.chats.length === 1 && props.chats[0] === "null"){
+        return(
+            <div style={{textAlign: "center"}}> Please Reload Chat!</div>
+        )
+    }
+    else{
+        return(
+            <React.Fragment>
+                 <div style={{fontSize: "17px", textAlign:"center"}}><strong>Chats</strong></div>
+                    <Divider style={{margin: "8px", padding: 0}}/>
+                    <SearchBar onSelect={props.onChatSelect} chats={props.chats}/>
+                {props.chats.length === 0 ? <EmptyContainer/> : props.chats.map((chat: chatType) => {
+                    return (
+                        <div onClick={() => props.onChatSelect(chat)}>
+                            <Grid centered columns="16">
+                                <Grid.Column width="4" verticalAlign="middle">
+                                    <div style={{display: "flex", justifyContent: "center", alignItems:"center"}}>
+                                        {chat.imageURL ? 
+                                            <img src={chat.imageURL ? chat.imageURL : undefined} alt="contactPicture" style={{height: "50px", width: "50px"}} /> 
+                                            :
+                                            <img style={{height: "50px", width: "50px"}} src="https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png" alt="placeholder" />
+                                        }
+                                    </div>
+                                </Grid.Column>
+                                <Grid.Column floated="right" width="12">
+                                    <Grid columns="16">
+                                        <Grid.Column verticalAlign="middle" floated="left" width="12">
+                                            <strong style={{fontSize: "16px", margin:"0px"}}> {chat.name} </strong>
+                                        </Grid.Column>
+                                        <Grid.Column verticalAlign="middle" floated="right" width="4">
+                                            <em style={{fontSize: "14px",color:"grey", paddingRight:"10px"}}> {formatLastActive(chat.lastActive)} </em>
+                                        </Grid.Column>
+                                    </Grid>
+                                    <Grid.Row>
+                                        <div style={{fontSize: "14px", paddingTop: "10px", color: "grey"}}> {chat.latest} </div>
+                                    </Grid.Row>
+                                </Grid.Column>
+                            </Grid>
+                            <Divider style={{margin: "5px"}}/>
+                        </div>
+                    );
+                })}
+            </React.Fragment>
+        )
+    
+    }
 }
