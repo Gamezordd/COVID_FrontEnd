@@ -89,11 +89,7 @@ export const MobileChatContacts = (props: IProps) => {
                             <Grid centered columns="16">
                                 <Grid.Column width="4" verticalAlign="middle">
                                     <div style={{display: "flex", justifyContent: "center", alignItems:"center"}}>
-                                        {chat.imageURL ? 
-                                            <img src={chat.imageURL ? chat.imageURL : undefined} alt="contactPicture" style={{height: "50px", width: "50px"}} /> 
-                                            :
-                                            <img style={{height: "50px", width: "50px"}} src="https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png" alt="placeholder" />
-                                        }
+                                    <img src={chat.imageURL ? chat.imageURL : undefined} alt="contactPicture" style={{height: "50px", width: "50px"}} />
                                     </div>
                                 </Grid.Column>
                                 <Grid.Column floated="right" width="12">
