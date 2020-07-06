@@ -103,6 +103,13 @@ class MobileChatFCBasic extends React.Component<IProps, IState> {
 			);
 			this.setState({ chats: this.state.chats.splice(indexToRemove, 1) });
 		});
+		this.props.firebase?.getUserChatsRef().on('child_changed', snapshot =>{
+			const indexTochange = this.state.chats.findIndex(chat => chat.userId === snapshot.key);
+			var newChats = this.state.chats;
+			newChats[indexTochange] = {...newChats[indexTochange], lastActive: snapshot.val().lastActive, latest: snapshot.val().latest}
+			console.log("newChats: ", newChats);
+			this.setState({chats: newChats})
+		})
 	}
 
 	fetchProfileImageURL = async (uid: string | null) => {
