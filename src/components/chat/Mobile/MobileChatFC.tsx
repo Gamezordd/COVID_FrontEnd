@@ -49,6 +49,8 @@ class MobileChatFCBasic extends React.Component<IProps, IState> {
 	}
 
 	async componentDidMount() {
+		console.log("chats: ", this.state.chats);
+		
 		if (this.state.chats.length === 0) {
 			this.setState({ isLoading: true });
 			await this.props.firebase
@@ -56,6 +58,7 @@ class MobileChatFCBasic extends React.Component<IProps, IState> {
 				.on('value', async snapshot => {
 					if (!snapshot.val()) return this.setState({ chats: ['null'] });
 					for (const [key, value] of Object.entries(snapshot.val())) {
+
 						const val: any = value;
 						await this.props.firebase?.getProfileImageUrl(key).then(url => {
 							this.setState({
@@ -71,6 +74,7 @@ class MobileChatFCBasic extends React.Component<IProps, IState> {
 						});
 					}
 					this.setState({ isLoading: false });
+					this.props.firebase?.getUserChatsRef().off('value')
 					//this.setState({isLoading: false, chats: this.state.chats.concat({userId: snapshot.key, ...snapshot.val(), imageURL: imgUrl})})
 				});
 		} else {
@@ -78,7 +82,6 @@ class MobileChatFCBasic extends React.Component<IProps, IState> {
 				?.getUserChatsRef()
 				.on('child_added', async snapshot => {
 					if (!snapshot.key) return;
-					console.log('chat: ', snapshot.val());
 					var imgUrl = null;
 					await this.props.firebase
 						?.getProfileImageUrl(snapshot.key)
