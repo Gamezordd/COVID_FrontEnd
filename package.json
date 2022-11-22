@@ -17,7 +17,7 @@
     "react-geocode": "^0.2.1",
     "react-google-autocomplete": "^1.2.4",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-static-google-map": "^0.6.2",
     "typeface-roboto": "^0.0.75"
   },
